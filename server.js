@@ -46,7 +46,7 @@ passport.deserializeUser((id, done) => {
 });
 
 myDB(async client => {
-  const myDataBase = await client.db('sample_airbnb').collection('users');
+  const myDataBase = await client.db('database').collection('users');
 
   // Be sure to change the title
   app.route('/').get((req, res) => {
