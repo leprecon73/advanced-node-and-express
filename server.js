@@ -35,16 +35,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-passport.serializeUser((user, done) => {
-  done(null, user._id);
-});
-
-passport.deserializeUser((id, done) => {
-  myDataBase.findOne({ _id: new ObjectID(id) }, (err, doc) => {
-    done(null, doc);
-  });
-});
-
 myDB(async client => {
   const myDataBase = await client.db('database').collection('users');
 
@@ -58,6 +48,15 @@ myDB(async client => {
   });
 
   // Serialization and deserialization here...
+  passport.serializeUser((user, done) => {
+    done(null, user._id);
+  });
+  
+  passport.deserializeUser((id, done) => {
+    myDataBase.findOne({ _id: new ObjectID(id) }, (err, doc) => {
+      done(null, doc);
+    });
+  });
 
   // Be sure to add this...
 }).catch(e => {
