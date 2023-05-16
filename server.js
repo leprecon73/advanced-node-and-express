@@ -38,14 +38,7 @@ app.use(passport.session());
 myDB(async client => {
   const myDataBase = await client.db('mongo-db').collection('collection-users');
 
-  // Be sure to change the title
-  app.route('/').get((req, res) => {
-    // Change the response to render the Pug template
-    res.render('index', {
-      title: 'Connected to Database',
-      message: 'Please login'
-    });
-  });
+
 
   // Serialization and deserialization here...
   passport.serializeUser((user, done) => {
@@ -64,4 +57,13 @@ myDB(async client => {
     res.render('index', { title: e, message: 'Unable to connect to database' });
   });
 });
+
+  // Be sure to change the title
+  app.route('/').get((req, res) => {
+    // Change the response to render the Pug template
+    res.render('index', {
+      title: 'Connected to Database',
+      message: 'Please login'
+    });
+  });
 
