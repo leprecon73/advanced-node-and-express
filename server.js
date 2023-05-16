@@ -36,7 +36,7 @@ app.use(passport.session());
 
 
 myDB(async client => {
-  const myDataBase = await client.db('database').collection('users');
+  const myDataBase = await client.db('mongo-db').collection('collection-users');
 
   // Be sure to change the title
   app.route('/').get((req, res) => {
